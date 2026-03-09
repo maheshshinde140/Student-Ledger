@@ -29,3 +29,107 @@ body {
 * {
   box-sizing: border-box;
 }
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.surface-card {
+  border: 1px solid var(--border);
+  background: linear-gradient(165deg, #ffffff 0%, #fffcf6 100%);
+  box-shadow: var(--shadow);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.24);
+}
+
+.primary-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: saturate(1.08);
+}
+
+.secondary-btn {
+  border: 1px solid var(--border);
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.secondary-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.danger-btn {
+  background: linear-gradient(135deg, #e11d48, #be123c);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 10px 24px rgba(225, 29, 72, 0.24);
+}
+
+.danger-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(231, 225, 216, 0.5) 25%,
+    rgba(255, 252, 246, 0.9) 50%,
+    rgba(231, 225, 216, 0.5) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+
+.toast-in {
+  animation: toastIn 240ms ease both;
+}
+
+.page-in {
+  animation: pageIn 400ms ease both;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  .toast-in,
+  .page-in {
+    animation: none;
+  }
+}

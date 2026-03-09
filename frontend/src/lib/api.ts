@@ -19,8 +19,30 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   });
 
   if (!response.ok) {
-    const message = await response.text();
-    throw new Error(message || "Request failed");
+    let message = "Request failed";
+    const contentType = response.headers.get("content-type") ?? "";
+
+    if (contentType.includes("application/json")) {
+      try {
+        const payload = await response.json();
+        if (typeof payload?.message === "string") {
+          message = payload.message;
+        } else if (Array.isArray(payload?.message) && payload.message.length) {
+          message = payload.message.join(", ");
+        } else if (typeof payload?.error === "string") {
+          message = payload.error;
+        }
+      } catch {
+        message = "Request failed";
+      }
+    } else {
+      const text = await response.text();
+      if (text.trim()) {
+        message = text;
+      }
+    }
+
+    throw new Error(message);
   }
 
   if (response.status === 204) {
