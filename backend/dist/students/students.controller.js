@@ -16,6 +16,7 @@ exports.StudentsController = void 0;
 const common_1 = require("@nestjs/common");
 const create_student_dto_1 = require("./dto/create-student.dto");
 const update_student_dto_1 = require("./dto/update-student.dto");
+const parse_object_id_pipe_1 = require("./pipes/parse-object-id.pipe");
 const students_service_1 = require("./students.service");
 let StudentsController = class StudentsController {
     studentsService;
@@ -47,7 +48,7 @@ __decorate([
 ], StudentsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
+    __param(0, (0, common_1.Param)('id', new parse_object_id_pipe_1.ParseObjectIdPipe())),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
@@ -61,7 +62,7 @@ __decorate([
 ], StudentsController.prototype, "create", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
+    __param(0, (0, common_1.Param)('id', new parse_object_id_pipe_1.ParseObjectIdPipe())),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_student_dto_1.UpdateStudentDto]),
@@ -69,7 +70,7 @@ __decorate([
 ], StudentsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
+    __param(0, (0, common_1.Param)('id', new parse_object_id_pipe_1.ParseObjectIdPipe())),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)

@@ -12,7 +12,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const studentSchema = z.object({
   name: z.string().min(2, "Name is required").max(100),
   email: z.string().email("Enter a valid email").max(150),
-  age: z.coerce.number().int().min(1).max(120),
+  age: z.number().int().min(1).max(120),
 });
 
 type StudentFormValues = z.infer<typeof studentSchema>;
